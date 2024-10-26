@@ -2,52 +2,49 @@ import React, {useEffect, useState} from "react";
 import {Button} from "./Button";
 
 type SettingsCounterPropsType = {
-    allValueSettingsCounter: (value: ValueSettingsCounter) => void
-}
-export type ValueSettingsCounter = {
     min: number;
     max: number;
+    updateSettings: (minValue: number, maxValue: number) => void;
 }
 
-export const SettingsCounter = ({allValueSettingsCounter}: SettingsCounterPropsType) => {
 
-    const [counterValue, setCounterValue] = useState<ValueSettingsCounter>({min: 4, max: 10});
+export const SettingsCounter = ({min, max, updateSettings}: SettingsCounterPropsType) => {
+
+    const [localMax, setLocalMax] = useState(JSON.stringify(max));
+    const [localMin, setLocalMin] = useState(JSON.stringify(min));
 
     useEffect(() => {
-        const maxValueAsString = localStorage.getItem("maxValue");
-        const minValueAsString = localStorage.getItem("minValue");
+        let savedMax = localStorage.getItem("maxValue");
+        let savedMin = localStorage.getItem("minValue");
+        if (savedMax) {
+            console.log(savedMax);
+            setLocalMax(savedMax);
+        }
+        if (savedMin) {
+            console.log(savedMin)
+            setLocalMin(savedMin);
+        }
 
-        setCounterValue((prevState) => ({
-            min: minValueAsString ? JSON.parse(minValueAsString) : prevState.min,
-            max: maxValueAsString ? JSON.parse(maxValueAsString) : prevState.max
-        }));
     }, []);
-
-
-    useEffect(() => {
-        localStorage.setItem("maxValue", JSON.stringify(counterValue.max));
-        localStorage.setItem("minValue", JSON.stringify(counterValue.min));
-    }, [counterValue]);
-
 
     return (
         <div>
             <div>
                 <span>max value:</span>
-                <input value={counterValue.max}
-                       onChange={(e) => setCounterValue({...counterValue, max: Number(e.currentTarget.value)})}
+                <input value={localMax}
+                       onChange={(e) => setLocalMax(e.currentTarget.value)}
                        type={"number"}/>
 
 
             </div>
             <div>
                 <span>min value:</span>
-                <input value={counterValue.min}
-                       onChange={(e) => setCounterValue({...counterValue, min: Number(e.currentTarget.value)})}
+                <input value={localMin}
+                       onChange={(e) => setLocalMin(e.currentTarget.value)}
                        type={"number"}/>
 
             </div>
-            <Button onClickHandler={() => allValueSettingsCounter(counterValue)} title={"set"}/>
+            <Button onClickHandler={() => updateSettings(Number(localMin), Number(localMax))} title={"set"}/>
         </div>
     );
 };
