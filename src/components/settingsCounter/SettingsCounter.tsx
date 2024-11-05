@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button} from "./Button";
+import {Button} from "../Button";
 
 type SettingsCounterPropsType = {
     min: number;
@@ -12,6 +12,14 @@ export const SettingsCounter = ({min, max, updateSettings}: SettingsCounterProps
 
     const [localMax, setLocalMax] = useState(JSON.stringify(max));
     const [localMin, setLocalMin] = useState(JSON.stringify(min));
+    const [checkDisabledButton, setCheckDisabledButton] = useState(true);
+
+
+    const updateSettingsHandler = () => {
+        updateSettings(Number(localMin), Number(localMax))
+        setCheckDisabledButton(!checkDisabledButton);
+    }
+
 
     useEffect(() => {
         let savedMax = localStorage.getItem("maxValue");
@@ -32,19 +40,24 @@ export const SettingsCounter = ({min, max, updateSettings}: SettingsCounterProps
             <div>
                 <span>max value:</span>
                 <input value={localMax}
-                       onChange={(e) => setLocalMax(e.currentTarget.value)}
+                       onChange={(e) => {
+                           setLocalMax(e.currentTarget.value)
+                           setCheckDisabledButton(true)
+                       }}
                        type={"number"}/>
-
 
             </div>
             <div>
                 <span>min value:</span>
                 <input value={localMin}
-                       onChange={(e) => setLocalMin(e.currentTarget.value)}
+                       onChange={(e) => {
+                           setLocalMin(e.currentTarget.value)
+                           setCheckDisabledButton(true)
+                       }}
                        type={"number"}/>
 
             </div>
-            <Button onClickHandler={() => updateSettings(Number(localMin), Number(localMax))} title={"set"}/>
+            <Button disabled={!checkDisabledButton} onClickHandler={() => updateSettingsHandler()} title={"set"}/>
         </div>
     );
 };

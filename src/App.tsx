@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./App.css";
-import {Сounter} from "./Сounter";
-import {SettingsCounter} from "./SettingsCounter";
+import {Сounter} from "./components/counter/Сounter";
+import {SettingsCounter} from "./components/settingsCounter/SettingsCounter";
 
 export type counterSettingsType = {
     min: number,
@@ -58,7 +58,8 @@ function App() {
 
         <div className="App">
             <SettingsCounter min={counterState.min} max={counterState.max} updateSettings={updateSettings}/>
-            <Сounter counterSettings={counterState} incValueCounter={incValueCounter} resetValueCounter={resetValueCounter} className={"counter"}/>
+            <Сounter counterSettings={counterState} incValueCounter={incValueCounter}
+                     resetValueCounter={resetValueCounter} className={"counter"}/>
         </div>
     );
 }
