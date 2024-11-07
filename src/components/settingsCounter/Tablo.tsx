@@ -3,23 +3,21 @@ import {counterSettingsType} from "../../App";
 
 type TabloProps = {
     className: string;
-    positiveCount: boolean;
     counterSettings: counterSettingsType
 }
 
-export const Tablo = ({className, positiveCount, counterSettings}: TabloProps) => {
+export const Tablo = ({className, counterSettings}: TabloProps) => {
 
-    let value: number | "enter values and press 'set'" | "Incorrect values" = counterSettings.valueCounter
+    let value: number | "Incorrect values" = counterSettings.valueCounter
 
-    if (value < 0) {
-        value = "enter values and press 'set'"
-    }
-    if (counterSettings.min === counterSettings.max) {
+
+    if (counterSettings.min === counterSettings.max || counterSettings.max < counterSettings.min || value < 0) {
         value = "Incorrect values"
     }
     return (
         <div>
-            <span className={positiveCount ? className : "invalidValue"}>{value}</span>
+            <span
+                className={counterSettings.valueCounter === counterSettings.max ? "filter-tablo" : className}>{counterSettings.error === "enter values and press 'set'" ? counterSettings.error : value}</span>
         </div>
     );
 };

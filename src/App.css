@@ -1,8 +1,9 @@
 .App {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     height: 100vh;
+    background: #a9dd92;
 }
 
 .App > div {
@@ -47,20 +48,13 @@
     border: 2px solid red;
 }
 
-.filter-tablo {
-    color: red;
-    font-weight: bold;
-    font-size: 40px;
-}
 
-.tablo {
-    font-weight: bold;
-    font-size: 40px;
-}
+
 
 .invalidValue {
-    font-size: 26px;
+    font-size: 40px;
     font-weight: bold;
+    color: red;
 
 }
 
@@ -70,10 +64,122 @@ button {
 }
 
 .counter {
-    border: 1px solid black;
+    border: 2px solid #3e583b;
     border-radius: 20px;
     padding: 50px;
-    background-color: #a9dd92;
-    width: 300px;
-    height: 100px;
+    background-color: #d1e3b8;
+    width: 220px;
+    height: 300px;
+    color: #3e583b;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; /* Равномерное распределение элементов с одинаковыми отступами */
+
+    div {
+        margin-top: 35px;
+    }
+}
+
+.setting-counter {
+    border: 2px solid #94fbbf;
+    border-radius: 20px;
+    padding: 50px;
+    background-color: #3e583b;
+    width: 220px;
+    height: 300px;
+    color: #d1e3b8;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+
+    button {
+        margin-top: 80px;
+    }
+
+    div {
+        margin-top: 10px;
+    }
+}
+
+
+.counterButton {
+    display: flex;
+    justify-content: space-around;
+}
+
+.invalidLocalValue {
+    background-color: #ff4d4d;
+    text-align: center;
+}
+
+.localValue {
+    text-align: center;
+}
+
+input[type="number"]:focus {
+    border-color: #3dc699;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(78, 239, 9, 0.25);
+
+}
+
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #6cc24a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+
+}
+
+
+button:hover {
+    background-color: #2b9b4f;
+    transform: scale(1.05);
+}
+
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.filter-tablo {
+    color: red;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.tablo {
+    font-weight: bold;
+    font-size: 40px;
+
+
 }
